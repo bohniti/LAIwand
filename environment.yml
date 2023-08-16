@@ -1,0 +1,12 @@
+name: laiwand-env
+channels:
+  - defaults
+dependencies:
+  - python=3.8
+  - pip
+  - pip:
+    - streamlit
+    - azure-cognitiveservices-vision-computervision
+    - pandas
+    - numpy
+    - matplotlib
