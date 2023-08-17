@@ -5,7 +5,7 @@ import streamlit as st
 import json
 import pandas as pd
 import helpers
-import  sl_test_graph
+import sl_test_graph
 
 
 st.title("ChatGPT-like clone")
@@ -53,6 +53,13 @@ if prompt := st.chat_input("Hallo wie kann ich Ihnen helfen?"):
             full_response += response.choices[0].delta.get("content", "")
             message_placeholder.markdown(full_response + "▌")
         message_placeholder.markdown(full_response)
+        sql_query = helpers.parse_sql_query(full_response)
+        st.write(sql_query)
+
+        result = helpers.execute_sql_query_on_dataframe("./application/train.csv", sql_query)
+
+        st.write(result)
+
     st.session_state.messages.append({"role": "assistant", "content": full_response})
 
-    sl_test_graph.generate_plot()
+
