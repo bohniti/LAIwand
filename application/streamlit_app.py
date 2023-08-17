@@ -1,23 +1,17 @@
 import openai
+
+import plotly.express as px
 import streamlit as st
 import json
+import pandas as pd
+import helpers
 
-def load_credentials(filename="./application/credentials.json"):
-    with open(filename, 'r') as file:
-        credentials = json.load(file)
-    return credentials
-
-
-def load_config(filename="./application/config.json"):
-    with open(filename, 'r') as file:
-        config = json.load(file)
-    return config
 
 st.title("ChatGPT-like clone")
 
 openai.api_key = "ec6b8771460d416aa289f4e1748851be"
-credentials = load_credentials()
-config = load_config()
+credentials = helpers.load_json("./application/credentials.json")
+config = helpers.load_json("./application/config.json")
 
 openai.api_type = credentials['api_type']
 openai.api_base = credentials['api_base']
@@ -37,7 +31,7 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-if prompt := st.chat_input("What is up?"):
+if prompt := st.chat_input("Hallo wie kann ich Ihnen helfen?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
@@ -58,3 +52,29 @@ if prompt := st.chat_input("What is up?"):
             message_placeholder.markdown(full_response + "▌")
         message_placeholder.markdown(full_response)
     st.session_state.messages.append({"role": "assistant", "content": full_response})
+
+
+
+# Load data and configuration from the JSON files
+with open('./application/sl_graph_data.json', 'r') as data_file:
+    data_config = json.load(data_file)
+
+with open('./application/sl_graph_hist_config.json', 'r') as hist_file:
+    hist_config = json.load(hist_file)
+
+# Convert data to DataFrame
+df = pd.DataFrame(data_config["data"])
+
+# Display histogram
+st.title(hist_config["chart_title"])
+fig = px.histogram(
+    df,
+    x=hist_config["x_axis"]["column"],
+    color=hist_config["group_by"],
+    title=hist_config["chart_title"],
+    labels={
+        hist_config["x_axis"]["column"]: data_config["headers"][hist_config["x_axis"]["column"]],
+        hist_config["group_by"]: data_config["headers"][hist_config["group_by"]]
+    }
+)
+st.plotly_chart(fig, use_container_width=True)
