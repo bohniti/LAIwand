@@ -1,0 +1,13 @@
+{
+    "chart_type": "bar",
+    "chart_title": "Dog Litters in Vienna by Area (2019-2023)",
+    "x_axis": {
+        "label": "Year",
+        "column": "categorical_a"
+    },
+    "y_axis": {
+        "label": "Number of Litters",
+        "column": "numeric_a"
+    },
+    "group_by": "categorical_b"
+}
