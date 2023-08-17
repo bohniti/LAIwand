@@ -13,3 +13,4 @@ dependencies:
     - watchdog
     - openai
     - plotly
+    - scipy
