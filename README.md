@@ -12,8 +12,8 @@ To set up the project, follow these steps:
 1. Clone the repository: git clone https://github.com/bohniti/LAIwand.git
 2. Navigate to the project directory: cd LAIwand
 3. Create and activate the Anaconda environment:
-   conda env create -f environment.yml
-   conda activate laiwand-env
+   1. conda env create -f environment.yml
+   2. conda activate laiwand-env
 4. Run the Streamlit app: streamlit run frontend/streamlit_app.py
 
 ## Project Structure
