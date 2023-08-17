@@ -1,5 +1,5 @@
 {
     "model_engine": "gpt-35-turbo",
     "temperature": 0,
-    "n": 2
+    "n": 1
 }

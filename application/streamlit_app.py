@@ -54,17 +54,16 @@ def main():
             # ---------------------------------
             # ACTUAL USE OF FUNCTION HERE
             assistant_response = chatbot.create_response(prompt)
+            assistant_response = assistant_response['choices'][0]['message']['content']
+
+
             # ---------------------------------
             # assistant_response = chatbot.generate_response(prompt)
             # Simulate stream of response with milliseconds delay
-            for chunk in assistant_response.split():
-                full_response += chunk + " "
-                time.sleep(0.05)
-                # Add a blinking cursor to simulate typing
-                message_placeholder.markdown(full_response + "▌")
-            message_placeholder.markdown(full_response)
+
+            message_placeholder.markdown(assistant_response)
         # Add assistant response to chat history
-        st.session_state.messages.append({"role": "assistant", "content": full_response})
+        st.session_state.messages.append({"role": "assistant", "content": assistant_response})
 
     # Add histogram data
     x1 = np.random.randn(200) - 2
