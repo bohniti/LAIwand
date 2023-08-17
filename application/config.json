@@ -1,0 +1,5 @@
+{
+    "model_engine": "gpt-8k",
+    "temperature": 0,
+    "n": 2
+}

@@ -1,15 +1,16 @@
 # Import Streamlit
 import streamlit as st
+from azure_services import create_response
 
-# Here, import your backend functions
-# For example, you might have a file `azure_services.py` in the backend folder:
-# from backend.azure_services import some_azure_function
+# Here, import your application functions
+# For example, you might have a file `azure_services.py` in the application folder:
+# from application.azure_services import some_azure_function
 
-# Placeholder function to simulate backend processing
-# Replace this with actual calls to Azure Cognitive Services in your backend code
+# Placeholder function to simulate application processing
+# Replace this with actual calls to Azure Cognitive Services in your application code
 def process_text(input_text):
     """
-    Placeholder function to simulate backend processing.
+    Placeholder function to simulate application processing.
     In the real application, this function should call the Azure Cognitive Services API.
     For this demo, it reverses the input text.
 
@@ -37,8 +38,9 @@ def main():
     # Button to trigger processing
     if st.button('Process'):
         if user_input:
-            # Here, we call our placeholder backend function (or your real Azure function)
-            result = process_text(user_input)
+            # Here, we call our placeholder application function (or your real Azure function)
+            #result = process_text(user_input)
+            result = create_response(user_input)
 
             # Display the result
             st.write('Processed Text:')
