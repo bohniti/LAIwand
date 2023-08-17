@@ -8,6 +8,11 @@ from azure_services import create_response
 
 # Placeholder function to simulate application processing
 # Replace this with actual calls to Azure Cognitive Services in your application code
+
+# Initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
 def process_text(input_text):
     """
     Placeholder function to simulate application processing.
