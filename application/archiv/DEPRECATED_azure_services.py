@@ -42,5 +42,8 @@ def create_response(user_prompt):
 
 # Example Usage
 user_prompt = "Tell me a joke"
-response = create_response(user_prompt)
-print(response)
+# response = create_response(user_prompt)
+# print(response)
+def generate_response(prompt):
+
+    return "Test response chatbot"
