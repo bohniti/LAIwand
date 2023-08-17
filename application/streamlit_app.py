@@ -9,11 +9,12 @@ import helpers
 
 st.title("ChatGPT-like clone")
 
-openai.api_key = "ec6b8771460d416aa289f4e1748851be"
+
 credentials = helpers.load_json("./application/credentials.json")
 config = helpers.load_json("./application/config.json")
 
-openai.api_type = credentials['api_type']
+openai.api_key = credentials['api_type']
+openai.api_type = credentials['api_key']
 openai.api_base = credentials['api_base']
 openai.api_version = credentials['api_version']
 openai.api_key = credentials['api_key']
