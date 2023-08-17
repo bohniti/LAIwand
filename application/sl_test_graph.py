@@ -7,15 +7,16 @@ import helpers
 def generate_plot():
     
     # Should be passed to function
-    graph_type = "bar"  
-    #graph_type = "clustered_bar"  
+    #graph_type = "bar"
+    graph_type = "clustered_bar"
     
     if graph_type == "bar":
         plot_config_path = "./application/sl_graph_config/sl_graph_bar_config.json"
-        data_path = "./application/sl_graph_config/sl_graph_data.json"
+        data_path = "./application/sl_graph_data/sl_graph_bar_data.json"
+
     elif graph_type == "clustered_bar":
         plot_config_path = "./application/sl_graph_config/sl_graph_clustered_bar_config.json"
-        data_path = "./application/sl_graph_config/sl_graph_clustered_bar_data.json"
+        data_path = "./application/sl_graph_data/sl_graph_clustered_bar_data.json"
 
     plot_config = helpers.load_json(plot_config_path)
     data_config = helpers.load_json(data_path)

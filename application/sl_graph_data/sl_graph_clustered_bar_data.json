@@ -16,7 +16,6 @@
         {"value": 2300, "year": "2022", "district": "1: Innere Stadt", "metric": "Number of Registered Dogs"},
         {"value": 590, "year": "2023", "district": "1: Innere Stadt", "metric": "Number of Litters"},
         {"value": 2400, "year": "2023", "district": "1: Innere Stadt", "metric": "Number of Registered Dogs"},
-
         {"value": 300, "year": "2019", "district": "2: Leopoldstadt", "metric": "Number of Litters"},
         {"value": 1800, "year": "2019", "district": "2: Leopoldstadt", "metric": "Number of Registered Dogs"},
         {"value": 320, "year": "2020", "district": "2: Leopoldstadt", "metric": "Number of Litters"},
@@ -27,7 +26,6 @@
         {"value": 2000, "year": "2022", "district": "2: Leopoldstadt", "metric": "Number of Registered Dogs"},
         {"value": 315, "year": "2023", "district": "2: Leopoldstadt", "metric": "Number of Litters"},
         {"value": 2050, "year": "2023", "district": "2: Leopoldstadt", "metric": "Number of Registered Dogs"},
-
         {"value": 400, "year": "2019", "district": "3: Landstraße", "metric": "Number of Litters"},
         {"value": 1700, "year": "2019", "district": "3: Landstraße", "metric": "Number of Registered Dogs"},
         {"value": 410, "year": "2020", "district": "3: Landstraße", "metric": "Number of Litters"},
