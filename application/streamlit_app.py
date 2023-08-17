@@ -1,6 +1,10 @@
 # Import Streamlit
 import streamlit as st
 from azure_services import create_response
+import streamlit as st
+import numpy as np
+import plotly.figure_factory as ff
+
 
 # Here, import your application functions
 # For example, you might have a file `azure_services.py` in the application folder:
@@ -23,6 +27,9 @@ def process_text(input_text):
     return input_text[::-1]
 
 # Streamlit App
+
+
+
 def main():
     """
     The main Streamlit application. This function defines the layout and flow of the app.
@@ -47,6 +54,24 @@ def main():
             st.write(result)
         else:
             st.warning('Please enter some text before pressing the "Process" button.')
+
+    # Add histogram data
+    x1 = np.random.randn(200) - 2
+    x2 = np.random.randn(200)
+    x3 = np.random.randn(200) + 2
+
+    # Group data together
+    hist_data = [x1, x2, x3]
+    group_labels = ['Group 1', 'Group 2', 'Group 3']
+
+    # Create distplot with custom bin_size
+    fig = ff.create_distplot(hist_data, group_labels, bin_size=[.1, .25, .5])
+
+    # Create a 3-column layout
+    col1, col2, col3 = st.columns(3)
+
+    # Use the middle column for the plot
+    col2.plotly_chart(fig, use_container_width=True)
 
 # Run the Streamlit app
 if __name__ == "__main__":
