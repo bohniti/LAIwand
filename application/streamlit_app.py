@@ -5,19 +5,20 @@ import streamlit as st
 import json
 import pandas as pd
 import helpers
+import  sl_test_graph
 
 
 st.title("ChatGPT-like clone")
 
 
+
 credentials = helpers.load_json("./application/credentials.json")
 config = helpers.load_json("./application/config.json")
 
-openai.api_key = credentials['api_type']
-openai.api_type = credentials['api_key']
+openai.api_key = credentials['api_key']
+openai.api_type = credentials['api_type']
 openai.api_base = credentials['api_base']
 openai.api_version = credentials['api_version']
-openai.api_key = credentials['api_key']
 
 model_engine = config['model_engine']
 temperature = config['temperature']
@@ -54,28 +55,4 @@ if prompt := st.chat_input("Hallo wie kann ich Ihnen helfen?"):
         message_placeholder.markdown(full_response)
     st.session_state.messages.append({"role": "assistant", "content": full_response})
 
-
-
-# Load data and configuration from the JSON files
-with open('./application/sl_graph_data.json', 'r') as data_file:
-    data_config = json.load(data_file)
-
-with open('./application/sl_graph_hist_config.json', 'r') as hist_file:
-    hist_config = json.load(hist_file)
-
-# Convert data to DataFrame
-df = pd.DataFrame(data_config["data"])
-
-# Display histogram
-st.title(hist_config["chart_title"])
-fig = px.histogram(
-    df,
-    x=hist_config["x_axis"]["column"],
-    color=hist_config["group_by"],
-    title=hist_config["chart_title"],
-    labels={
-        hist_config["x_axis"]["column"]: data_config["headers"][hist_config["x_axis"]["column"]],
-        hist_config["group_by"]: data_config["headers"][hist_config["group_by"]]
-    }
-)
-st.plotly_chart(fig, use_container_width=True)
+    sl_test_graph.generate_plot()
