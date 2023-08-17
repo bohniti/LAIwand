@@ -1,0 +1,21 @@
+{
+    "chart_type": "scatter",
+    "chart_title": "Iris Sepal vs Petal Dimensions",
+    "color_continuous_scale": "Viridis",
+    "x_axis": {
+        "label": "Sepal Width (cm)",
+        "column": "sepal_width"
+    },
+    "y_axis": {
+        "label": "Sepal Length (cm)",
+        "column": "sepal_length"
+    },
+    "color": {
+        "column": "petal_length",
+        "range": [1, 7]
+    },
+    "point": {
+        "size": 10,
+        "opacity": 0.8
+    }
+}

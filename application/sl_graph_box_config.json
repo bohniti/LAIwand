@@ -1,0 +1,12 @@
+{
+    "chart_type": "box",
+    "chart_title": "Iris Petal Length by Species",
+    "y_axis": {
+        "label": "Petal Length (cm)",
+        "column": "petal_length"
+    },
+    "x_axis": {
+        "label": "Species",
+        "column": "species"
+    }
+}
