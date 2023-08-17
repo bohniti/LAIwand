@@ -5,7 +5,7 @@ __pycache__/
 .idea/ghit
 
 #configs
-*credentials
+application/credentials.json
 
 # Mac
 .DS_Store

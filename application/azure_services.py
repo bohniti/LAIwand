@@ -2,13 +2,13 @@ import openai
 import json
 
 
-def load_credentials(filename='credentials.json'):
+def load_credentials(filename="./application/credentials.json"):
     with open(filename, 'r') as file:
         credentials = json.load(file)
     return credentials
 
 
-def load_config(filename='config.json'):
+def load_config(filename="./application/config.json"):
     with open(filename, 'r') as file:
         config = json.load(file)
     return config
