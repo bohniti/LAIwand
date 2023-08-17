@@ -1,0 +1,29 @@
+{
+    "headers": {
+        "ratio": "Litters per Registered Dog",
+        "year": "Year",
+        "district": "District"
+    },
+    "data": [
+        // Data for "1: Innere Stadt"
+        {"ratio": 0.25, "year": "2019", "district": "1: Innere Stadt"},
+        {"ratio": 0.26, "year": "2020", "district": "1: Innere Stadt"},
+        {"ratio": 0.245, "year": "2021", "district": "1: Innere Stadt"},
+        {"ratio": 0.252, "year": "2022", "district": "1: Innere Stadt"},
+        {"ratio": 0.246, "year": "2023", "district": "1: Innere Stadt"},
+
+        // Data for "2: Leopoldstadt"
+        {"ratio": 0.166, "year": "2019", "district": "2: Leopoldstadt"},
+        {"ratio": 0.168, "year": "2020", "district": "2: Leopoldstadt"},
+        {"ratio": 0.169, "year": "2021", "district": "2: Leopoldstadt"},
+        {"ratio": 0.155, "year": "2022", "district": "2: Leopoldstadt"},
+        {"ratio": 0.153, "year": "2023", "district": "2: Leopoldstadt"},
+
+        // Data for "3: Landstraße"
+        {"ratio": 0.235, "year": "2019", "district": "3: Landstraße"},
+        {"ratio": 0.234, "year": "2020", "district": "3: Landstraße"},
+        {"ratio": 0.239, "year": "2021", "district": "3: Landstraße"},
+        {"ratio": 0.227, "year": "2022", "district": "3: Landstraße"},
+        {"ratio": 0.226, "year": "2023", "district": "3: Landstraße"}
+    ]
+}

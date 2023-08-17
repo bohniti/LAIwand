@@ -1,0 +1,10 @@
+{
+    "chart_type": "clustered_bar",
+    "chart_title": "Dog Litters and Registered Dogs in Vienna by District (2019-2023)",
+    "x_axis": {
+        "label": "Year",
+        "column": "year"
+    },
+    "y_columns": ["Number of Litters", "Number of Registered Dogs"],
+    "group_by": "district"
+}
