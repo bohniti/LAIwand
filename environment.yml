@@ -1,8 +1,8 @@
-name: laiwand-env3
+name: laiwand-env
 channels:
   - defaults
 dependencies:
-  - python=3.10
+  - python=3.8
   - pip
   - pip:
     - streamlit
