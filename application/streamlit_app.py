@@ -5,6 +5,7 @@ import pandas as pd
 import pandasql as psql
 import streamlit as st
 import openai
+import plotly.express as px
 
 
 # -------------------------
@@ -45,6 +46,11 @@ def ask_for_intent_confirmation(prompt, model_engine, temperature):
     )
     intent_text = intent_response.choices[0].message.get("content", "Do you mean: ...?")
     return intent_text
+
+# Neue Funktion, um einen Plotly-Plot zu erstellen
+def generate_plotly_plot(df):
+    fig = px.scatter(df, x=df.columns[0], y=df.columns[1])
+    return fig
 
 
 # -------------------------
@@ -113,10 +119,18 @@ if st.session_state.intent_confirmed:
             message_placeholder.markdown(full_response + "▌")
 
         message_placeholder.markdown(full_response)
-        sql_query = parse_sql_query(full_response)
-        if 'df' in st.session_state and sql_query:
-            result = execute_sql_query_on_dataframe(sql_query, st.session_state.df)
-            st.write(result)
+
+        # Prüfen, ob das Wort 'plot' in der Anfrage des Nutzers vorkommt
+        if 'plot' in st.session_state.prompt.lower():
+            if 'df' in st.session_state:
+                # Erstellen und Anzeigen des Plotly-Plots
+                fig = generate_plotly_plot(st.session_state.df)
+                st.plotly_chart(fig)
+        else:
+            sql_query = parse_sql_query(full_response)
+            if 'df' in st.session_state and sql_query:
+                result = execute_sql_query_on_dataframe(sql_query, st.session_state.df)
+                st.write(result)
 
     st.session_state.messages.append({"role": "assistant", "content": full_response})
     st.session_state.intent_confirmed = False
