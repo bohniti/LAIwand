@@ -45,20 +45,21 @@ def main():
         st.session_state.prompt = st.chat_input("Hallo wie kann ich Ihnen helfen?")
 
     if st.session_state.prompt and not st.session_state.intent_confirmed:
+        st.session_state.prompt = "Gesucht ist eine SQL Query für Pandas." + st.session_state.prompt + 'Gebe nur das pure SQL Statement in dreifachen Anführungszeichen zurück. Deine Antwort sollte so formatiert sein: """select from where""""'
         intent_text = ask_for_intent_confirmation(st.session_state.prompt, model_engine, temperature)
         st.session_state.messages.append({"role": "user", "content": st.session_state.prompt})
 
         with st.chat_message("assistant"):
             st.markdown(intent_text)
 
-        if st.button("Confirm the above intent"):
+        if st.button("Bestätigen Sie die obige Anfrage"):
             st.session_state.intent_confirmed = True
 
-        if st.button("Deny the above intent"):
+        if st.button("Lehnen Sie die obige Anfrage ab."):
             st.session_state.intent_confirmed = False
             st.session_state.prompt = None
             st.session_state.messages = []
-            st.chat_input("Intent denied. Please try again. How can I assist you?")
+            st.chat_input("Anfrage verweigert. Bitte versuchen Sie es erneut. Wie kann ich Ihnen helfen?")
 
     if st.session_state.prompt and st.session_state.intent_confirmed:
         with st.chat_message("assistant"):
