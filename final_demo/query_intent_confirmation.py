@@ -8,5 +8,5 @@ def ask_for_intent_confirmation(prompt, model_engine, temperature):
             {"role": "user", "content": prompt}
         ]
     )
-    intent_text = intent_response.choices[0].message.get("content", "Do you mean: ...?")
+    intent_text = intent_response.choices[0].message.get("content", "Meinen Sie: ...?")
     return intent_text
