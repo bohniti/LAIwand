@@ -2,6 +2,9 @@ import json
 import re
 import pandas as pd
 import pandasql as psql
+import os
+import pandas as pd
+import streamlit as st
 
 def load_json(filename):
     with open(filename, 'r') as file:
@@ -59,9 +62,6 @@ def wrap_user_prompt(user_prompt, start_hidden_prompt, end_hidden_prompt):
     wrapped_prompt = f'[SYSTEM]{start_hidden_prompt}[/SYSTEM][USER]{user_prompt}[/USER][SYSTEM]{end_hidden_prompt}[/SYSTEM]'
     return wrapped_prompt
 
-import os
-import pandas as pd
-import streamlit as st
 
 def list_csv_files(directory):
     """
