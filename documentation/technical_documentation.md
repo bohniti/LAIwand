@@ -81,7 +81,7 @@ To set up the project and run the application, follow these steps:
 4. Run the Streamlit app: Launch the Streamlit app using the following command.
     ```bash
     Copy code
-    streamlit run .application/streamlit_app.py
+    streamlit run ./final_demo/main.py
 
 ## 5. Application/Code Architecture Overview
 
