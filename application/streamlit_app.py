@@ -7,7 +7,6 @@ import streamlit as st
 import openai
 import plotly.express as px
 
-
 # -------------------------
 # Utility Functions
 # -------------------------
@@ -17,24 +16,19 @@ def load_json(filename):
         content = json.load(file)
     return content
 
-
 def parse_sql_query(response):
     pattern = r'\'\'\'(.*?)\'\'\'|\"\"\"(.*?)\"\"\"'
     match = re.search(pattern, response, re.DOTALL)
     return match.group(1) or match.group(2) if match else None
 
-
 def execute_sql_query_on_dataframe(sql_query, df):
     return psql.sqldf(sql_query, locals())
-
 
 def list_csv_files(directory):
     return [f for f in os.listdir(directory) if f.endswith('.csv')]
 
-
 def load_csv_file(file_path):
     return pd.read_csv(file_path)
-
 
 def ask_for_intent_confirmation(prompt, model_engine, temperature):
     intent_response = openai.ChatCompletion.create(
@@ -47,11 +41,9 @@ def ask_for_intent_confirmation(prompt, model_engine, temperature):
     intent_text = intent_response.choices[0].message.get("content", "Do you mean: ...?")
     return intent_text
 
-# Neue Funktion, um einen Plotly-Plot zu erstellen
 def generate_plotly_plot(df):
     fig = px.scatter(df, x=df.columns[0], y=df.columns[1])
     return fig
-
 
 # -------------------------
 # Streamlit App
@@ -62,9 +54,15 @@ st.title("ChatGPT-like clone")
 directory = './application/'
 
 csv_files = list_csv_files(directory)
-selected_csv_file = st.selectbox('Wählen Sie eine CSV-Datei:', csv_files)
 
-if st.button('Lade CSV Datei'):
+# Entfernen der '.csv'-Endung aus den Dateinamen
+csv_file_names_without_extension = [os.path.splitext(file)[0] for file in csv_files]
+
+selected_csv_file_name = st.selectbox('Wählen Sie ein Thema aus:', csv_file_names_without_extension)
+
+if st.button('Lade Daten'):
+    # Hier wird der ursprüngliche Dateiname (mit der '.csv'-Endung) aus der Liste 'csv_files' abgerufen
+    selected_csv_file = csv_files[csv_file_names_without_extension.index(selected_csv_file_name)]
     file_path = os.path.join(directory, selected_csv_file)
     st.session_state.df = load_csv_file(file_path)
     st.write(st.session_state.df)
@@ -79,10 +77,13 @@ openai.api_version = credentials['api_version']
 
 model_engine = config['model_engine']
 temperature = config['temperature']
+
 if "messages" not in st.session_state:
     st.session_state.messages = []
+
 if 'intent_confirmed' not in st.session_state:
     st.session_state.intent_confirmed = False
+
 if 'prompt' not in st.session_state:
     st.session_state.prompt = None
 
@@ -94,6 +95,7 @@ if not st.session_state.prompt:
     st.session_state.prompt = st.chat_input("Hallo wie kann ich Ihnen helfen?")
 
 if st.session_state.prompt and not st.session_state.intent_confirmed:
+    st.session_state.prompt = "SQL Query für Pandas." + st.session_state.prompt + 'Gebe nur das pure SQL Statement in dreifachen Anführungszeichen zurück. Deine Antwort sollte so formatiert sein: """select bal from blub where""""'
     intent_text = ask_for_intent_confirmation(st.session_state.prompt, model_engine, temperature)
     st.session_state.messages.append({"role": "user", "content": st.session_state.prompt})
     with st.chat_message("assistant"):
@@ -120,10 +122,8 @@ if st.session_state.intent_confirmed:
 
         message_placeholder.markdown(full_response)
 
-        # Prüfen, ob das Wort 'plot' in der Anfrage des Nutzers vorkommt
         if 'plot' in st.session_state.prompt.lower():
             if 'df' in st.session_state:
-                # Erstellen und Anzeigen des Plotly-Plots
                 fig = generate_plotly_plot(st.session_state.df)
                 st.plotly_chart(fig)
         else:
@@ -136,4 +136,3 @@ if st.session_state.intent_confirmed:
     st.session_state.intent_confirmed = False
     st.session_state.prompt = None
     st.session_state.messages = []
-

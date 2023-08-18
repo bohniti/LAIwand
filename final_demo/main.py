@@ -2,13 +2,10 @@ import streamlit as st
 import os
 import openai
 from pathlib import Path
-
-# Importieren der Module
 from daten_laden import list_csv_files, load_csv_file
 from daten_visualisieren import generate_plotly_plot
 from query_intent_confirmation import ask_for_intent_confirmation
 from utility_functions import load_json, parse_sql_query, execute_sql_query_on_dataframe
-
 
 def main():
     st.title("ChatGPT-like clone")
@@ -57,7 +54,13 @@ def main():
         if st.button("Confirm the above intent"):
             st.session_state.intent_confirmed = True
 
-    if st.session_state.intent_confirmed:
+        if st.button("Deny the above intent"):
+            st.session_state.intent_confirmed = False
+            st.session_state.prompt = None
+            st.session_state.messages = []
+            st.chat_input("Intent denied. Please try again. How can I assist you?")
+
+    if st.session_state.prompt and st.session_state.intent_confirmed:
         with st.chat_message("assistant"):
             message_placeholder = st.empty()
             full_response = ""
@@ -89,7 +92,6 @@ def main():
         st.session_state.intent_confirmed = False
         st.session_state.prompt = None
         st.session_state.messages = []
-
 
 if __name__ == "__main__":
     main()
