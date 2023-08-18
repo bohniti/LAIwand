@@ -83,7 +83,7 @@ To set up the project and run the application, follow these steps:
     Copy code
     streamlit run .application/streamlit_app.py
 
-## 5. Architecture Overview
+## 5. Application/Code Architecture Overview
 
 The application follows a multi-component architecture:
 
@@ -102,6 +102,10 @@ The application follows a multi-component architecture:
 4. The application parses the AI response for intent confirmation using ask_for_intent_confirmation.
 5. If confirmed, the AI-generated response is processed further based on user prompts.
 
+## 6. Architecture Diagram
+
+!["Architecture Diagram"](Architecture_Diagram_ENG.png)
+_(German Version is in **/documentation**)_
 
 ## Data Loading and Interaction
 
