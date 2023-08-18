@@ -1,6 +1,7 @@
 import streamlit as st
 import os
 import openai
+from pathlib import Path
 
 # Importieren der Module
 from daten_laden import list_csv_files, load_csv_file
@@ -12,7 +13,7 @@ from utility_functions import load_json, parse_sql_query, execute_sql_query_on_d
 def main():
     st.title("ChatGPT-like clone")
 
-    directory = './application/'
+    directory = Path("LAIwand/application/").resolve()
     csv_files = list_csv_files(directory)
     selected_csv_file = st.selectbox('Wählen Sie eine CSV-Datei:', csv_files)
 
@@ -21,8 +22,8 @@ def main():
         st.session_state.df = load_csv_file(file_path)
         st.write(st.session_state.df)
 
-    credentials = load_json("./application/credentials.json")
-    config = load_json("./application/config.json")
+    credentials = load_json(Path("LAIwand/application/credentials.json").resolve())
+    config = load_json(Path("LAIwand/application/config.json").resolve())
 
     openai.api_key = credentials['api_key']
     openai.api_type = credentials['api_type']
